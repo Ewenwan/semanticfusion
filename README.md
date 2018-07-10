@@ -1,3 +1,20 @@
+# 偏重怎样结合CNN搭建一套稠密语义SLAM的系统。SemanticFusion架构上主要分为三部分：
+
+    1） 前面提到过的ElasticFusion这种稠密SLAM来计算位姿并建出稠密地图；
+         稠密SLAM重建目前也相对比较成熟，
+         从最开始的KinectFusion（TSDF数据结构 + ICP），
+         到后来的InfiniTAM（用哈希表来索引很稀疏的voxel）, 
+         ElasticFusion（用surfel点表示模型并用非刚性的图结构），
+         DynamicFusion（引入了体翘曲场这样深度数据通过体翘曲场的变换后，
+             才能融入到TSDF数据结构中，完成有非刚性物体的动态场景重建）都做的比较成熟。
+         工业界实现非常好的是微软的HoloLens，在台积电的24核DSP上把mesh simplification这些操作都搞了上去。
+
+    2） CNN用RGB或RGBD图来生成一个概率图，每个像素都对应着识别出来的物体类别；
+
+    3）通过贝叶斯更新(CRF,条件随机场)来把识别的结果和SLAM生成的关联信息整合进统一的稠密语义地图中。
+
+
+
 # README #
 
 ### Related publications ###
